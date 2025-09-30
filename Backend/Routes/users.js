@@ -6,14 +6,16 @@ const
     getUser,
     updateUser,
     deleteUser,
-  } = require("../Controller/usersControllers");
+  } = require("../Controllers/usersController");
+  const authMiddleware = require("../Middleware/authMiddleware");
+
 
 const router = express.Router();
 
-router.post("/", createUser); // POST /users
-router.get("/", getAllUsers); // GET  /users
-router.get("/:id", getUser); // GET  /users/:id
-router.put("/:id", updateUser); // PUT  /users/:id
-router.delete("/:id", deleteUser); // DELETE /users/:id
+router.post("/", authMiddleware, createUser);                // POST /users
+router.get("/", authMiddleware,getAllUsers);                 // GET  /users
+router.get("/:id",authMiddleware, getUser);                  // GET  /users/:id
+router.put("/:id",authMiddleware, updateUser);               // PUT  /users/:id
+router.delete("/:id",authMiddleware, deleteUser);            // DELETE /users/:id
 
 module.exports = router;

@@ -1,0 +1,48 @@
+// src/pages/Login.jsx
+import React, { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import { toast } from "react-toastify";
+import api from "../Utils/Api";
+
+const Login = () => {
+  const [form, setForm] = useState({ email: "", password: "" });
+  const navigate = useNavigate();
+
+  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await api.post("/auths/login", form);
+      const token = res.data.token;
+      // Expect backend to return adminName (string). If backend sends different key, change below.
+      const adminName = res.data.adminName || res.data.name || "";
+      if (!token) throw new Error("No token returned");
+      localStorage.setItem("token", token);
+      if (adminName) localStorage.setItem("adminName", adminName);
+      toast.success("Logged in successfully");
+      navigate("/dashboard");
+    } catch (err) {
+      toast.error(err.response?.data?.error || err.message || "Login failed");
+    }
+  };
+
+  return (
+    <div className="flex-1 flex items-center justify-center px-6 py-10">
+      <form onSubmit={handleSubmit} className="w-full max-w-md bg-white/10 backdrop-blur-sm p-8 rounded-xl">
+        <h2 className="text-2xl font-bold mb-4 text-white">Login</h2>
+        <input name="email" type="email" placeholder="Email" value={form.email} onChange={handleChange}
+          className="w-full mb-3 p-3 rounded bg-transparent border border-white/30 text-white" required />
+        <input name="password" type="password" placeholder="Password" value={form.password} onChange={handleChange}
+          className="w-full mb-4 p-3 rounded bg-transparent border border-white/30 text-white" required />
+        <button type="submit" className="w-full py-3 rounded bg-gradient-to-r from-blue-500 to-indigo-500 text-white">Login</button>
+        <p className="text-center mt-4">
+          Don&apos;t have an account? <Link to="/signup" style={{ color: 'blue' }} className="text-decoration-none fw-semibold">Sign Up</Link>
+        </p>
+      </form>
+       
+    </div>
+  );
+};
+
+export default Login;
