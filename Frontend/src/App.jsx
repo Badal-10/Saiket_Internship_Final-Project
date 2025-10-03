@@ -79,10 +79,8 @@ const AppWrapper = () => {
 
   return (
     <div className="flex flex-col min-h-screen">
-      {/* Navbar */}
       <Navbar />
 
-      {/* Main content */}
       <main className="flex-1 flex flex-col pb-16">
         <Routes>
           <Route path="/" element={<Home />} />
@@ -91,10 +89,8 @@ const AppWrapper = () => {
           <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
       </main>
-      {/* Toasts */}
       <ToastContainer position="top-right" autoClose={3000} />
 
-      {/* Footer */}
       <Footer />
     </div>
   );

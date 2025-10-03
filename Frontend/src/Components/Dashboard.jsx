@@ -1,5 +1,4 @@
 /* eslint-disable no-unused-vars */
-// src/pages/Dashboard.jsx
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import api from "../Utils/Api";
@@ -18,7 +17,8 @@ const Dashboard = () => {
       const res = await api.get("/users");
       setUsers(res.data || []);
       setFilteredUsers(res.data || []);
-    } catch (err) {
+    } 
+    catch (err) {
       toast.error("Failed to fetch users");
     }
   };

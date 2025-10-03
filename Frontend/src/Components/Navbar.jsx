@@ -1,4 +1,3 @@
-// src/components/Navbar.jsx
 import React, { useEffect, useRef, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 const logo = "/Logo.png";

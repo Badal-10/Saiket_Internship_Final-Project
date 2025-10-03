@@ -1,4 +1,3 @@
-// src/pages/Login.jsx
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -15,14 +14,14 @@ const Login = () => {
     try {
       const res = await api.post("/auths/login", form);
       const token = res.data.token;
-      // Expect backend to return adminName (string). If backend sends different key, change below.
       const adminName = res.data.adminName || res.data.name || "";
       if (!token) throw new Error("No token returned");
       localStorage.setItem("token", token);
       if (adminName) localStorage.setItem("adminName", adminName);
       toast.success("Logged in successfully");
       navigate("/dashboard");
-    } catch (err) {
+    } 
+    catch (err) {
       toast.error(err.response?.data?.error || err.message || "Login failed");
     }
   };
