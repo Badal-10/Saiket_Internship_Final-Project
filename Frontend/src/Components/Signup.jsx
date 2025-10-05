@@ -32,7 +32,7 @@ const Signup = () => {
           className="w-full mb-4 p-3 rounded bg-transparent border border-white/30 text-white" required />
         <button type="submit" className="w-full py-3 rounded bg-gradient-to-r from-green-500 to-teal-500 text-white">Sign up</button>
         <p className="text-center mt-4">
-          Already have an account? <Link to="/login" style={{ color: 'blue' }} className="text-decoration-none fw-semibold">Login</Link>
+          Already have an account? <Link to="/login"  className="text-decoration-none fw- text-blue-800">Login</Link>
         </p>
       </form>
     </div>

@@ -38,7 +38,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="flex justify-between items-center fixed left-0 right-0 px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600">
+    <nav className="flex justify-between items-center fixed left-0 right-0 px-6 py-3 bg-gradient-to-r from-[#12c2e9] via-[#c471ed] to-[#f64f59]">
       {adminName ? (
         <div className="flex items-center gap-2">
           <img src={logo} alt="Logo" className="h-12 w-12 rounded-full shadow-lg" />
