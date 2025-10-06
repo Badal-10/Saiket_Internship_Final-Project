@@ -7,6 +7,6 @@ const router = express.Router();
 router.post("/signup", signup);
 router.post("/login", login);
 
-router.get("/me", authMiddleware, me); // protected: returns admin profile
+router.get("/me", authMiddleware, me);       // protected: returns admin profile
 
 module.exports = router;

@@ -1,4 +1,3 @@
-// Controllers/authController.js
 const db = require("../db");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -61,7 +60,8 @@ const me = async (req, res) => {
     if (rows.length === 0) return res.status(404).json({ error: "Admin not found" });
 
     return res.json(rows[0]);
-  } catch (err) {
+  } 
+  catch (err) {
     return res.status(500).json({ error: "Failed to fetch profile", details: err.message });
   }
 };

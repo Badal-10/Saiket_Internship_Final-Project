@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation } from "react-router-dom";
-import {jwtDecode} from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -27,7 +27,7 @@ const AppWrapper = () => {
     if (inactivityTimeoutRef.current) clearTimeout(inactivityTimeoutRef.current);
     inactivityTimeoutRef.current = setTimeout(() => {
       logout();
-    }, 60 * 60 * 1000); // 1 hour inactivity timeout
+    }, 60 * 60 * 1000);                  // 1 hour inactivity timeout
   };
 
   useEffect(() => {
@@ -35,7 +35,7 @@ const AppWrapper = () => {
     if (token) {
       try {
         const decoded = jwtDecode(token);
-        const now = Date.now() / 1000; // current time in seconds
+        const now = Date.now() / 1000;     // current time in seconds
 
         if (decoded.exp && decoded.exp < now) {
           // token expired → force logout
@@ -58,8 +58,9 @@ const AppWrapper = () => {
         logout();
       }
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [navigate]);
+
 
   // Route protection
   useEffect(() => {

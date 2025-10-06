@@ -17,7 +17,7 @@ const Dashboard = () => {
       const res = await api.get("/users");
       setUsers(res.data || []);
       setFilteredUsers(res.data || []);
-    } 
+    }
     catch (err) {
       toast.error("Failed to fetch users");
     }
@@ -56,7 +56,8 @@ const Dashboard = () => {
       setForm({ name: "", email: "", age: "" });
       setEditingId(null);
       fetchUsers();
-    } catch (err) {
+    } 
+    catch (err) {
       toast.error(err.response?.data?.error || "Operation failed");
     }
   };
@@ -78,7 +79,8 @@ const Dashboard = () => {
       await api.delete(`/users/${id}`);
       toast.error("User deleted Successfully");
       fetchUsers();
-    } catch (err) {
+    } 
+    catch (err) {
       toast.error("Delete failed");
     }
   };
@@ -89,11 +91,13 @@ const Dashboard = () => {
     const sortedUsers = [...filteredUsers].sort((a, b) => {
       if (key === "age") {
         return direction === "asc" ? a.age - b.age : b.age - a.age;
-      } else if (key === "createdAt") {
+      } 
+      else if (key === "createdAt") {
         return direction === "asc"
           ? new Date(a.createdAt) - new Date(b.createdAt)
           : new Date(b.createdAt) - new Date(a.createdAt);
-      } else {
+      } 
+      else {
         return direction === "asc"
           ? a[key].localeCompare(b[key])
           : b[key].localeCompare(a[key]);
@@ -108,34 +112,34 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="flex-1 px-6 py-8 mt-12">
+    <div className="flex-1 px-4 sm:px-6 py-4 sm:py-8 mt-12 sm:mt-16">
       <div className="max-w-6xl mx-auto">
-        <div className="flex items-center justify-between mb-6">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 gap-4">
           <div>
-            <h1 className="text-3xl font-bold">👋 Welcome, {adminName}!</h1>
+            <h1 className="text-2xl sm:text-3xl font-bold">👋 Welcome, {adminName}!</h1>
             <p className="text-sm text-white/80">Manage your users below.</p>
           </div>
-          <div className="bg-white/20 px-4 py-2 rounded-md text-black">
+          <div className="bg-white/20 px-4 py-2 rounded-md text-black self-start sm:self-auto">
             Total users: <strong>{filteredUsers.length}</strong>
           </div>
         </div>
 
         {/* form card */}
-        <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 mb-8">
+        <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 sm:p-6 mb-8">
           <h2 className="text-lg font-semibold mb-4">{editingId ? "Edit user" : "Add user"}</h2>
-          <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-4 gap-3 items-center">
+          <form onSubmit={handleSubmit} className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 items-end">
             <input name="name" placeholder="Full name" value={form.name} onChange={handleChange}
-              className="p-3 rounded bg-transparent border border-white/30" />
+              className="p-3 rounded bg-transparent border border-white/30 text-sm sm:text-base" />
             <input name="email" placeholder="Email" value={form.email} onChange={handleChange}
-              className="p-3 rounded bg-transparent border border-white/30" />
+              className="p-3 rounded bg-transparent border border-white/30 text-sm sm:text-base" />
             <input name="age" type="number" placeholder="Age" value={form.age} onChange={handleChange}
-              className="p-3 rounded bg-transparent border border-white/30" />
+              className="p-3 rounded bg-transparent border border-white/30 text-sm sm:text-base" />
             <div className="flex gap-2">
-              <button type="submit" className="px-4 py-2 rounded bg-gradient-to-r from-green-400 to-green-600 text-white">
+              <button type="submit" className="px-4 py-2 rounded bg-gradient-to-r from-green-400 to-green-600 text-white text-sm sm:text-base">
                 {editingId ? "Update" : "Create"}
               </button>
               {editingId && (
-                <button type="button" onClick={handleCancelEdit} className="px-4 py-2 rounded bg-gray-200 text-black">
+                <button type="button" onClick={handleCancelEdit} className="px-4 py-2 rounded bg-gray-200 text-black text-sm sm:text-base">
                   Cancel
                 </button>
               )}
@@ -144,19 +148,19 @@ const Dashboard = () => {
         </div>
 
         {/* Search and Sort */}
-        <div className="flex items-center justify-between mb-6">
-          <div className="flex items-center gap-4 w-full">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 gap-4">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full">
             <input
               type="text"
               placeholder="Search by name or email"
               value={searchQuery}
               onChange={handleSearch}
-              className="flex-1 p-3 rounded bg-transparent border border-white/30"
+              className="flex-1 p-3 rounded bg-transparent border border-white/30 text-sm sm:text-base"
             />
             <div className="relative">
               <select
                 onChange={handleSortChange}
-                className="p-3 rounded bg-transparent border border-white/30"
+                className="p-3 rounded bg-transparent border border-white/30 text-sm sm:text-base w-full sm:w-auto"
               >
                 <option value="createdAt-asc">Sort by Created At (Ascending)</option>
                 <option value="createdAt-desc">Sort by Created At (Descending)</option>
