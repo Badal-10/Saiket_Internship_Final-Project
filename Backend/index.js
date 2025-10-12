@@ -13,6 +13,9 @@ app.use(cors());
 app.use("/auths", authRouter);
 app.use("/users", usersRouter);
 
+app.get('/', (req, res) => {
+  res.status(200).send('API is online and running!');
+});
 
 // Global error handler
 app.use((err, req, res, next) => {
